@@ -27,4 +27,42 @@
       <version>1.1.2</version>
     </dependency>
   </dependencies>
+  <build>
+    <plugins>
+      <plugin>
+        <groupId>org.codehaus.mojo</groupId>
+        <artifactId>appassembler-maven-plugin</artifactId>
+        <version>1.10</version>
+        <executions>
+          <execution>
+            <id>assemble-standalone</id>
+            <phase>package</phase>
+            <goals>
+              <goal>assemble</goal>
+            </goals>
+          </execution>
+        </executions>
+        <configuration>
+          <configurationSourceDirectory>src/main/java</configurationSourceDirectory>
+          <includeConfigurationDirectoryInClasspath>true</includeConfigurationDirectoryInClasspath>
+          <copyConfigurationDirectory>true</copyConfigurationDirectory>
+          <repositoryLayout>flat</repositoryLayout>
+          <platforms>
+            <platform>unix</platform>
+          </platforms>
+          <programs>
+            <program>
+              <mainClass>hbaseApp.App</mainClass>
+              <name>hBaseApp.sh</name>
+              <jvmSettings>
+                <extraArguments>
+                  <extraArgument>-server</extraArgument>
+                </extraArguments>
+              </jvmSettings>
+            </program>
+          </programs>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
 </project>

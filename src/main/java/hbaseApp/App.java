@@ -19,17 +19,40 @@ public class App
         conf.set("hbase.zookeeper.property.clientPort", zk);
 
         HBaseAdmin admin = new HBaseAdmin(conf);
-        byte[] TABLE = Bytes.toBytes("Users");
-        byte[] CF = Bytes.toBytes("Basic Data");
-        HTableDescriptor table = new
+        byte[] TABLE = Bytes.toBytes("TopHashtags");
+        byte[] CF = Bytes.toBytes("hash");
+        HTableDescriptor table_desc = new
                 HTableDescriptor(TableName.valueOf(TABLE));
         HColumnDescriptor family = new
                 HColumnDescriptor(CF);
         family.setMaxVersions(10); // Default is 3.
-        table.addFamily(family);
-        admin.createTable(table);
+        table_desc.addFamily(family);
+        admin.createTable(table_desc);
 
+        HConnection conn =
+                HConnectionManager.createConnection(conf);
+        HTable table = new
+                HTable(TableName.valueOf(TABLE),conn);
 
-        System.out.println( "Hello World!ds" );
+        for (int i = 0; i < 100; i++){
+            byte[] key = Bytes.toBytes("145071446500" + Integer.toString(i));
+            byte[] value = Bytes.toBytes("Macbook" + Integer.toString(i % 10));
+            byte[] column = Bytes.toBytes("hashword");
+            Put put = new Put(key);
+            put.add(CF,
+                    column,
+                    value);
+            table.put(put);
+        }
+
+        Scan scan = new Scan();
+        ResultScanner rs = table.getScanner(scan);
+        Result res = rs.next();
+        while (res!=null && !res.isEmpty()){
+            System.out.println(res);
+            res = rs.next();
+        }
+
+        System.out.println( "Hello World!" );
     }
 }
