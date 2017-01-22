@@ -162,6 +162,7 @@ public class App
     public static void readData(String path) throws IOException {
         File folder = new File(path);
         for (File fileEntry : folder.listFiles()) {
+            // CHECK IF FILES TO READ ARE LANGUAGE FILES NOT JUST RANDOM
             if (!fileEntry.isDirectory() && fileEntry.getName().endsWith(".log")) {
                 BufferedReader br = new BufferedReader(new FileReader(fileEntry.getAbsolutePath()));
                 try {
