@@ -26,6 +26,9 @@ public class App
     public static void main( String[] args ) throws IOException {
         String zk = "cesvima141G5H4";
         String port = "2181";
+        String outpath = "/home/student/data/output/";
+        String inpath = "/home/student/data";
+        Integer n = 10;
 
         Configuration conf = HBaseConfiguration.create();
         conf.set("hbase.zookeeper.quorum", zk);
@@ -46,13 +49,13 @@ public class App
 
         conn = HConnectionManager.createConnection(conf);
         table = new HTable(TableName.valueOf(TABLE),conn);
-        String path = "/home/student/data/output/";
 
-        readData("/home/student/data");
 
-        query(5, "1448471400000", "1448472600000", "en", 1, path);
-        query(3, "1448471400000", "1448475600000", "en,fr", 2, path);
-        query(6, "1448471400000", "1448475600000", "all", 3, path);
+        readData(inpath);
+
+        query(n, "1448471400000", "1448472600000", "en", 1, outpath);
+        query(n, "1448471400000", "1448497600000", "en,fr,de", 2, outpath);
+        query(n, "1448471400000", "1448475600000", "all", 3, outpath);
     }
 
     public static void query(Integer n, String start, String end, String lang, Integer mode, String path)
