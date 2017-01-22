@@ -28,7 +28,7 @@
     </annotationProcessing>
     <bytecodeTargetLevel>
       <module name="hbaseApp" target="1.5" />
-      <module name="hbaseApp2" target="1.5" />
+      <module name="hbaseApp2" target="1.7" />
     </bytecodeTargetLevel>
   </component>
 </project>
