@@ -14,14 +14,14 @@ public class App
 {
     static HConnection conn;
     static HTable table;
-    static byte[] TABLE = Bytes.toBytes("twitterStats4");
-    static byte[] CF = Bytes.toBytes("hashtags");
-    static byte[] col11 = Bytes.toBytes("hashtagFirst");
-    static byte[] col12 = Bytes.toBytes("countFirst");
-    static byte[] col21 = Bytes.toBytes("hashtagSecond");
-    static byte[] col22 = Bytes.toBytes("countSecond");
-    static byte[] col31 = Bytes.toBytes("hashtagThird");
-    static byte[] col32 = Bytes.toBytes("countThird");
+    static byte[] TABLE = Bytes.toBytes( "twitterStats6" );
+    static byte[] CF = Bytes.toBytes( "hashtags" );
+    static byte[] col11 = Bytes.toBytes( "hashtagFirst" );
+    static byte[] col12 = Bytes.toBytes( "countFirst" );
+    static byte[] col21 = Bytes.toBytes( "hashtagSecond" );
+    static byte[] col22 = Bytes.toBytes( "countSecond" );
+    static byte[] col31 = Bytes.toBytes( "hashtagThird" );
+    static byte[] col32 = Bytes.toBytes( "countThird" );
 
     public static void main( String[] args ) throws Exception
     {
@@ -215,10 +215,11 @@ public class App
                 else
                     out.println( lang + "," + ( i + 1 ) + "," + HashCountList.get( i ) + "," + start + "," + end );
             }
-            out.close();
-            bw.close();
-            fw.close();
         }
+
+        out.close();
+        bw.close();
+        fw.close();
     }
 
     //Read data from input files and insert
